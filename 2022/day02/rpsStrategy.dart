@@ -39,7 +39,7 @@ List<bool> winLose(List game) {
 }
 
 void main() {
-  File('./rpsSample.txt').readAsString().then((String contents) {
+  File('./rpsActual.txt').readAsString().then((String contents) {
     int score = 0;
 
     contents.split('\n').forEach((line) {
