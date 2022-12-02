@@ -8,7 +8,7 @@ import 'dart:io';
  * 1 = paper,
  * 2 = scissors
  */
-List getGameDecision(List lineAsList) {
+List<int> getGameDecision(List lineAsList) {
   assert('ABC'.contains(lineAsList[0]));
   assert('XYZ'.contains(lineAsList[1]));
 
@@ -21,7 +21,7 @@ List getGameDecision(List lineAsList) {
 /**
  * return [bool playerWins, bool playerLoses]
  */
-List winLose(List game) {
+List<bool> winLose(List game) {
   assert([0, 1, 2].contains(game[0]));
   assert([0, 1, 2].contains(game[1]));
 
@@ -39,13 +39,28 @@ List winLose(List game) {
 }
 
 void main() {
+  int score = 0;
   File('./rpsSample.txt').readAsString().then((String contents) {
     contents.split('\n').forEach((line) {
       if (line != '') {
-        List decision = getGameDecision(line.split(' '));
-        print(winLose(decision));
-        print(decision);
+        List<int> decisions = getGameDecision(line.split(' '));
+        // print(winLose(decision));
+        // print(decision);
+
+        List<bool> results = winLose(decisions);
+        if (results[0]) {
+          // player wins
+          score += 6;
+        } else if (results[0] == results[1]) {
+          // draw
+          score += 3;
+        }
+
+        // rock: +1, paper: +2, scissors: +3
+        score += 1 + decisions[1];
       }
     });
   });
+
+  print(score);
 }
