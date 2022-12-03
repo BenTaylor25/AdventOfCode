@@ -51,25 +51,24 @@ func sortString(str string) string {
 }
 
 func findSameInBoth(ln []string) string {
-	// compOne := []rune(ln[0])
-	// sort.Slice(compOne, func(i, j int) bool {
-	// 	return compOne[i] < compOne[j]
-	// })
-	// compOneS := string(compOne)
-	compOneS := sortString(ln[0])
-	fmt.Println(compOneS)
+	compOne := sortString(ln[0])
+	compTwo := sortString(ln[1])
 
-	// compTwo := []rune(ln[1])
-	// sort.Slice(compTwo, func(i, j int) bool {
-	// 	return compTwo[i] < compTwo[j]
-	// })
-	// compTwoS := string(compTwo)
-	compTwoS := sortString(ln[1])
-	fmt.Println(compTwoS)
+	i, j := 0, 0
 
-	fmt.Println()
+	for (i < len(compOne) && j < len(compTwo) && compOne[i] != compTwo[j]) {
+		if (compOne[i] < compTwo[j]) {
+			i++
+		} else {
+			j++
+		}
+	}
 
-	return "-"
+	if (compOne[i] == compTwo[j]) {
+		return string(compOne[i])
+	}
+
+	panic("no char in both")
 }
 
 func main() {
