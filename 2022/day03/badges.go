@@ -40,9 +40,19 @@ func getCommonInGroup(grp []string) string {
 	elfTwo := sortString(grp[1])
 	elfThr := sortString(grp[2])
 
+	// fmt.Println(elfOne)
+	// fmt.Println(elfTwo)
+	// fmt.Println(elfThr)
+	// fmt.Println()
+
 	i, j, k := 0, 0, 0
 
-	for (i < len(elfOne) && j < len(elfTwo) && k < len(elfThr) && elfOne[i] != elfTwo[j] && elfOne[i] != elfThr[k]) {
+	for (i < len(elfOne) && j < len(elfTwo) && k < len(elfThr) && !(elfOne[i] == elfTwo[j] && elfOne[i] == elfThr[k])) {
+		// fmt.Println(elfOne[i])
+		// fmt.Println(elfTwo[j])
+		// fmt.Println(elfThr[k])
+		// fmt.Println()
+
 		if (elfOne[i] < elfTwo[j]) {
 			i++
 		} else if (elfOne[i] > elfTwo[j]) {
@@ -92,7 +102,7 @@ func main() {
 		group = append(group, ln)
 
 		if len(group) == 3 {
-			fmt.Println(group)
+			// fmt.Println(group)
 			commonInGroup := getCommonInGroup(group)
 			prioritySum += getPriority(commonInGroup)
 			group = group[:0]
