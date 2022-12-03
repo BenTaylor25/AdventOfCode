@@ -42,9 +42,7 @@ func getCommonInGroup(grp []string) string {
 
 	i, j, k := 0, 0, 0
 
-	for (i < len(elfOne) && j < len(elfTwo) && k < len(elfThr)
-		&& elfOne[i] != elfTwo && elfOne[i] != elfThr[k])
-	{
+	for (i < len(elfOne) && j < len(elfTwo) && k < len(elfThr) && elfOne[i] != elfTwo[j] && elfOne[i] != elfThr[k]) {
 		if (elfOne[i] < elfTwo[j]) {
 			i++
 		} else if (elfOne[i] > elfTwo[j]) {
