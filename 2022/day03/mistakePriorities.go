@@ -71,13 +71,29 @@ func findSameInBoth(ln []string) string {
 	panic("no char in both")
 }
 
+func getPriority(char string) int {
+	cRune := []rune(char)[0]
+	cAscii := int(cRune)
+
+	if cAscii >= 97 && cAscii <= 122 {
+		// 1 - 26
+		return cAscii - 96
+	} else if cAscii >= 65 && cAscii <= 90 {
+		// 27 - 52
+		return cAscii - 38
+	}
+
+	panic("char not in alphabet")
+}
+
 func main() {
 	splitLines := getSplitLines("rucksackSample.txt")
 	// fmt.Println(splitLines)
 
 	for _, ln := range splitLines {
 		sameInBoth := findSameInBoth(ln)
-		fmt.Println(sameInBoth)
+		priority := getPriority(sameInBoth)
+		fmt.Println(priority)
 	}
 	
 }
