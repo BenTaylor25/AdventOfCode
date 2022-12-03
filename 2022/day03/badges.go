@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"bufio"
+	"os"
+	"log"
+	"sort"
+)
 
 func getLines(filename string) []string {
 	file, err := os.Open(filename);
@@ -37,8 +43,8 @@ func getCommonInGroup(grp []string) string {
 	i, j, k := 0, 0, 0
 
 	for (i < len(elfOne) && k < len(elfThr) && elfOne[i] != elfThr[k]) {
-		for (i < len(compOne) && j < len(compTwo) && compOne[i] != compTwo[j]) {
-			if (compOne[i] < compTwo[j]) {
+		for (i < len(elfOne) && j < len(elfTwo) && elfOne[i] != elfTwo[j]) {
+			if (elfOne[i] < elfTwo[j]) {
 				i++
 			} else {
 				j++
@@ -52,7 +58,7 @@ func getCommonInGroup(grp []string) string {
 		}
 	}
 
-	if elfOne[i] == elfTwo[j] == elfThr[k] {
+	if elfOne[i] == elfTwo[j] && elfOne[i] == elfThr[k] {
 		return string(elfOne[i])
 	}
 
@@ -77,7 +83,7 @@ func getPriority(char string) int {
 func main() {
 	lines := getLines("rucksackSample.txt")
 
-	if len(lines) % 3 {
+	if len(lines) % 3 != 0 {
 		panic("cannot split elves into groups of 3")
 	}
 
@@ -88,8 +94,9 @@ func main() {
 		group = append(group, ln)
 
 		if len(group) == 3 {
+			fmt.Println(group)
 			commonInGroup := getCommonInGroup(group)
-			prioritySum += priority
+			prioritySum += getPriority(commonInGroup)
 			group = group[:0]
 		}
 	}
