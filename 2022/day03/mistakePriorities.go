@@ -88,13 +88,16 @@ func getPriority(char string) int {
 
 func main() {
 	splitLines := getSplitLines("rucksackSample.txt")
-	// fmt.Println(splitLines)
+	prioritySum := 0
 
 	for _, ln := range splitLines {
 		sameInBoth := findSameInBoth(ln)
 		priority := getPriority(sameInBoth)
-		fmt.Println(priority)
+		// fmt.Println(priority)
+
+		prioritySum += priority
 	}
-	
+
+	fmt.Println(prioritySum)
 }
 
