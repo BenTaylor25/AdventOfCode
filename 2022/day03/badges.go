@@ -89,7 +89,7 @@ func getPriority(char string) int {
 }
 
 func main() {
-	lines := getLines("rucksackSample.txt")
+	lines := getLines("rucksackActual.txt")
 
 	if len(lines) % 3 != 0 {
 		panic("cannot split elves into groups of 3")
