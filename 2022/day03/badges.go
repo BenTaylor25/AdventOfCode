@@ -88,7 +88,7 @@ func getPriority(char string) int {
 	panic("char not in alphabet")
 }
 
-func main() {
+func badgesMain() {
 	lines := getLines("rucksackActual.txt")
 
 	if len(lines) % 3 != 0 {
@@ -113,3 +113,12 @@ func main() {
 
 }
 
+func main() {
+	runFirst := false
+
+	if runFirst {
+		mistakePrioritiesMain()
+	} else {
+		badgesMain()
+	}
+}
