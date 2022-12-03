@@ -87,7 +87,7 @@ func getPriority(char string) int {
 }
 
 func main() {
-	splitLines := getSplitLines("rucksackSample.txt")
+	splitLines := getSplitLines("rucksackActual.txt")
 	prioritySum := 0
 
 	for _, ln := range splitLines {
