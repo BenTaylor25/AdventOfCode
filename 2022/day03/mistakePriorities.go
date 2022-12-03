@@ -40,19 +40,31 @@ func getSplitLines(filename string) [][]string {
 	return split
 }
 
-func findSameInBoth(ln []string) string {
-	compOne := []rune(ln[0])
-	sort.Slice(compOne, func(i, j int) bool {
-		return compOne[i] < compOne[j]
+func sortString(str string) string {
+	strRune := []rune(str)
+
+	sort.Slice(strRune, func(i, j int) bool {
+		return strRune[i] < strRune[j]
 	})
-	compOneS := string(compOne)
+
+	return string(strRune)
+}
+
+func findSameInBoth(ln []string) string {
+	// compOne := []rune(ln[0])
+	// sort.Slice(compOne, func(i, j int) bool {
+	// 	return compOne[i] < compOne[j]
+	// })
+	// compOneS := string(compOne)
+	compOneS := sortString(ln[0])
 	fmt.Println(compOneS)
 
-	compTwo := []rune(ln[1])
-	sort.Slice(compTwo, func(i, j int) bool {
-		return compTwo[i] < compTwo[j]
-	})
-	compTwoS := string(compTwo)
+	// compTwo := []rune(ln[1])
+	// sort.Slice(compTwo, func(i, j int) bool {
+	// 	return compTwo[i] < compTwo[j]
+	// })
+	// compTwoS := string(compTwo)
+	compTwoS := sortString(ln[1])
 	fmt.Println(compTwoS)
 
 	fmt.Println()
