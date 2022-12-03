@@ -2,24 +2,28 @@ package main
 
 import (
 	"fmt"
+	"bufio"
+	"os"
+	"log"
+	"sort"
 )
 
-// func getLines(filename string) []string {
-// 	file, err := os.Open(filename);
-// 	if err != nil {
-// 		log.Fatal(err);
-// 	}
-// 	defer file.Close();
+func getLines(filename string) []string {
+	file, err := os.Open(filename);
+	if err != nil {
+		log.Fatal(err);
+	}
+	defer file.Close();
 
-// 	var lines []string;
+	var lines []string;
 
-// 	scanner := bufio.NewScanner(file);
-// 	for scanner.Scan() {
-// 		lines = append(lines, scanner.Text())
-// 	}
+	scanner := bufio.NewScanner(file);
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
 
-// 	return lines
-// }
+	return lines
+}
 
 func getSplitLines(filename string) [][]string {
 	lines := getLines(filename)
@@ -36,15 +40,15 @@ func getSplitLines(filename string) [][]string {
 	return split
 }
 
-// func sortString(str string) string {
-// 	strRune := []rune(str)
+func sortString(str string) string {
+	strRune := []rune(str)
 
-// 	sort.Slice(strRune, func(i, j int) bool {
-// 		return strRune[i] < strRune[j]
-// 	})
+	sort.Slice(strRune, func(i, j int) bool {
+		return strRune[i] < strRune[j]
+	})
 
-// 	return string(strRune)
-// }
+	return string(strRune)
+}
 
 func findSameInBoth(ln []string) string {
 	compOne := sortString(ln[0])
@@ -67,22 +71,22 @@ func findSameInBoth(ln []string) string {
 	panic("no char in both")
 }
 
-// func getPriority(char string) int {
-// 	cRune := []rune(char)[0]
-// 	cAscii := int(cRune)
+func getPriority(char string) int {
+	cRune := []rune(char)[0]
+	cAscii := int(cRune)
 
-// 	if cAscii >= 97 && cAscii <= 122 {
-// 		// 1 - 26
-// 		return cAscii - 96
-// 	} else if cAscii >= 65 && cAscii <= 90 {
-// 		// 27 - 52
-// 		return cAscii - 38
-// 	}
+	if cAscii >= 97 && cAscii <= 122 {
+		// 1 - 26
+		return cAscii - 96
+	} else if cAscii >= 65 && cAscii <= 90 {
+		// 27 - 52
+		return cAscii - 38
+	}
 
-// 	panic("char not in alphabet")
-// }
+	panic("char not in alphabet")
+}
 
-func mistakePrioritiesMain() {
+func main() {
 	splitLines := getSplitLines("rucksackActual.txt")
 	prioritySum := 0
 
