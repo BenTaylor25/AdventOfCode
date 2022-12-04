@@ -1,0 +1,33 @@
+
+Each pair has `startA-endA,startB-endB`.
+
+
+(assume startA != startB, endA != endB)
+if
+`startA - startB`
+has the same sign as
+`endA - endB`
+then
+`startA < startB && endA < endB`
+or
+`startA > startB && endA > endB`
+therefore no overlap
+
+however if the signs are different,
+`startA < startB && endA > endB`
+or
+`startA > startB && endA < endB`
+therefore overlap
+
+[sign can be compared using X * Y; +ve product: same sign, -ve product: different sign]
+
+
+
+if 
+`startA == startB`
+then (one of)
+`endA <  endB` -> B contains A
+`endA == endB` -> A and B contain each other?
+`endA >  endB` -> A contains B
+
+[check this before the above]
