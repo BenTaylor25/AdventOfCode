@@ -2,7 +2,7 @@ use std::fs;
 
 fn read_pairs() -> Vec<[i32; 4]> {
     // run from count_contains dir
-    let contents = fs::read_to_string("./assignmentSample.txt")
+    let contents = fs::read_to_string("./assignmentActual.txt")
         .expect("Cannot read file.");
 
     let lines = contents.split('\n');
