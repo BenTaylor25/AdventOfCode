@@ -2,7 +2,7 @@ use std::fs;
 
 fn read_pairs() -> Vec<[i32; 4]> {
     // run from count_contains dir
-    let contents = fs::read_to_string("./assignmentActual.txt")
+    let contents = fs::read_to_string("./assignmentSample.txt")
         .expect("Cannot read file.");
 
     let lines = contents.split('\n');
@@ -38,20 +38,17 @@ fn read_pairs() -> Vec<[i32; 4]> {
     return pairs_as_vec
 }
 
-fn contains(pair: [i32; 4]) -> bool {
-    if pair[0] == pair[2] {
-        return true;
+fn overlaps(pair: [i32; 4]) -> bool {
+    if pair[0] < pair[2] {
+        return pair[1] >= pair[2];
     }
-
-    let diff_product = (pair[0] - pair[2]) * (pair[1] - pair[3]);
-
-    return diff_product <= 0;
+    return pair[3] >= pair[0];
 }
 
-fn get_contains_count(pairs: Vec<[i32; 4]>) -> i32 {
+fn get_overlap_count(pairs: Vec<[i32; 4]>) -> i32 {
     let mut count = 0;
     for pair in pairs {
-        if contains(pair) {
+        if overlaps(pair) {
             count += 1;
         }
     }
@@ -60,8 +57,8 @@ fn get_contains_count(pairs: Vec<[i32; 4]>) -> i32 {
 
 fn main() {
     let pairs = read_pairs();
-    let contains_count = get_contains_count(pairs);
+    let overlap_count = get_overlap_count(pairs);
 
-    println!("{}", contains_count);
+    println!("{}", overlap_count);
 }
 
