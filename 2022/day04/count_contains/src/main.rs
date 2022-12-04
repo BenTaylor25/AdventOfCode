@@ -1,6 +1,6 @@
 use std::fs;
 
-fn read_pair() {
+fn read_pair() -> Vec<[i32; 4]> {
     // run from count_contains dir
     let contents = fs::read_to_string("./assignmentSample.txt")
         .expect("Cannot read file.");
@@ -32,9 +32,10 @@ fn read_pair() {
         }
     }
 
-    for p in pairs_as_vec {
-        println!("{} {} {} {}", p[0], p[1], p[2], p[3]);
-    }
+    // for p in pairs_as_vec {
+    //     println!("{} {} {} {}", p[0], p[1], p[2], p[3]);
+    // }
+    return pairs_as_vec
 }
 
 fn main() {
