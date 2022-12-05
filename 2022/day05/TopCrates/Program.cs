@@ -14,7 +14,7 @@ class Program {
 
     private static List<List<char>> GetCrateState(string filename) {
 
-        string[] crateLines = GetCrateLines(filename);
+        string[] crateLines = ReadCrateLines(filename);
 
         // columns are represented with 3 characters, joined by a space
         // `123 123 123`
