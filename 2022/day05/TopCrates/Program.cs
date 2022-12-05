@@ -12,9 +12,9 @@ class Program {
         return lines.Where((n, i) => i < delim).ToArray();
     }
 
-    private static List<List<char>> ReadCrateState(string filename) {
+    private static List<List<char>> GetCrateState(string filename) {
 
-        string[] crateLines = ReadCrateLines(filename);
+        string[] crateLines = GetCrateLines(filename);
 
         // columns are represented with 3 characters, joined by a space
         // `123 123 123`
@@ -49,7 +49,7 @@ class Program {
     public static void Main() {
         string filename = "./cratesSample.txt";
 
-        List<List<char>> crates = ReadCrateState(filename);
+        List<List<char>> crates = GetCrateState(filename);
 
         foreach (List<char> crateLine in crates) {
             foreach (char crate in crateLine) {
