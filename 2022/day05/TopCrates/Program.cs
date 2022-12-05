@@ -26,10 +26,23 @@ class Program {
         // l = 4c - 1
         // c = (l + 1) / 4
         int colCount = (crateLines[0].Length + 1) / 4;
+        int rowCount = crateLines.Length;
 
-        Console.WriteLine(colCount);
+        List<char> cratesAsList = new List<char>();
 
-        return new List<char>();
+        for (int r = 0; r < rowCount-1; r++) {
+            int rInd = r*4 + 1;
+
+            for (int c = rowCount-2; c >= 0; c--) {
+                if (crateLines[c][rInd] != ' ') {
+                    Console.WriteLine(crateLines[c][rInd]);
+                }
+            }
+            
+            Console.WriteLine();
+        }
+
+        return cratesAsList;
     }
 
     public static void Main() {
