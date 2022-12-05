@@ -65,13 +65,28 @@ class Program {
     private static List<List<int>> GetInstructions(string filename) {
 
         string[] lines = ReadCrateInstructions(filename);
+        List<List<int>> instructions = new List<List<int>>();
 
-        foreach (string l in lines) {
-            Console.WriteLine(l);
+        foreach (string line in lines) {
+            string[] split = line.Split(' ');
+
+            List<int> instruction = new List<int>{
+                Int32.Parse(split[1]), 
+                Int32.Parse(split[3]), 
+                Int32.Parse(split[5])
+            };
+
+            instructions.Add(instruction);
         }
 
-    
-        return new List<List<int>>();
+        // foreach (List<int> inst in instructions) {
+        //     foreach (int n in inst) {
+        //         Console.Write(n + " ");
+        //     }
+        //     Console.WriteLine();
+        // }
+
+        return instructions;
     }
 
     public static void Main() {
@@ -87,7 +102,7 @@ class Program {
         }
         Console.WriteLine();
 
-        // List<List<int>> instr = GetInstructions(filename);
+        List<List<int>> instr = GetInstructions(filename);
 
         
     }
