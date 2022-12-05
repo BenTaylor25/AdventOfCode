@@ -30,13 +30,13 @@ class Program {
 
         List<List<char>> cratesAsList = new List<List<char>>();
 
-        for (int r = 0; r < rowCount-1; r++) {
-            int rInd = r*4 + 1;
+        for (int c = 0; c < colCount; c++) {
+            int cInd = c*4 + 1;
 
             List<char> crateStack = new List<char>();
-            for (int c = rowCount-2; c >= 0; c--) {
-                if (crateLines[c][rInd] != ' ') {
-                    crateStack.Add(crateLines[c][rInd]);
+            for (int r = rowCount-2; r >= 0; r--) {
+                if (crateLines[r][cInd] != ' ') {
+                    crateStack.Add(crateLines[r][cInd]);
                 }
             }
 
