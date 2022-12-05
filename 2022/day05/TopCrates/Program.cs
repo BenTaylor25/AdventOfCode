@@ -79,13 +79,6 @@ class Program {
             instructions.Add(instruction);
         }
 
-        // foreach (List<int> inst in instructions) {
-        //     foreach (int n in inst) {
-        //         Console.Write(n + " ");
-        //     }
-        //     Console.WriteLine();
-        // }
-
         return instructions;
     }
 
@@ -94,17 +87,22 @@ class Program {
 
         List<List<char>> crates = GetCrateState(filename);
 
-        foreach (List<char> crateLine in crates) {
-            foreach (char crate in crateLine) {
-                Console.Write(crate + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
+        // foreach (List<char> crateLine in crates) {
+        //     foreach (char crate in crateLine) {
+        //         Console.Write(crate + " ");
+        //     }
+        //     Console.WriteLine();
+        // }
+        // Console.WriteLine();
 
-        List<List<int>> instr = GetInstructions(filename);
+        List<List<int>> instructions = GetInstructions(filename);
 
-        
+        // foreach (List<int> inst in instructions) {
+        //     foreach (int n in inst) {
+        //         Console.Write(n + " ");
+        //     }
+        //     Console.WriteLine();
+        // }
     }
 }
 
