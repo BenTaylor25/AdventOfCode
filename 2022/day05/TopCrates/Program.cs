@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+
 class Program {
     private static string[] ReadCrateLines(string filename) {
         string[] lines = System.IO.File.ReadAllLines(filename);
@@ -9,7 +11,21 @@ class Program {
             } 
         }
 
-        return lines.Where((n, i) => i < delim).ToArray();
+        List<string> listLines = new List<string>(lines);
+        return listLines.GetRange(0, delim).ToArray();
+    }
+
+    private static string[] ReadCrateInstructions(string filename) {
+        string[] lines = System.IO.File.ReadAllLines(filename);
+        int delim = -1;
+        for (int i = 0; i < lines.Length; i++) {
+            if (lines[i] == "") {
+                delim = i;
+            }
+        }
+
+        List<string> listLines = new List<string>(lines);
+        return listLines.GetRange(delim+1, lines.Length-delim-1).ToArray();
     }
 
     private static List<List<char>> GetCrateState(string filename) {
@@ -46,6 +62,18 @@ class Program {
         return cratesAsList;
     }
 
+    private static List<List<int>> GetInstructions(string filename) {
+
+        string[] lines = ReadCrateInstructions(filename);
+
+        foreach (string l in lines) {
+            Console.WriteLine(l);
+        }
+
+    
+        return new List<List<int>>();
+    }
+
     public static void Main() {
         string filename = "./cratesSample.txt";
 
@@ -57,6 +85,11 @@ class Program {
             }
             Console.WriteLine();
         }
+        Console.WriteLine();
+
+        // List<List<int>> instr = GetInstructions(filename);
+
+        
     }
 }
 
