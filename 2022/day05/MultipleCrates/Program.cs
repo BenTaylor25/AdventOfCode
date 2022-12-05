@@ -82,16 +82,20 @@ class Program {
         return instructions;
     }
 
-    private static void DoInstruction(List<List<char>> crates, int from, int to) {
+    private static void DoInstruction(List<List<char>> crates, int amount, int from, int to) {
         from--;   // 1-indexed to 0-indexed
         to--;
 
-        crates[to].Add(crates[from].Last());
-        crates[from].RemoveAt(crates[from].Count - 1);
+        for (int i = amount; i > 0; i--) {
+            crates[to].Add(crates[from][crates[from].Count - i]);
+        }
+        for (int _ = 0; _ < amount; _++) {
+            crates[from].RemoveAt(crates[from].Count - 1);
+        }
     }
 
     public static void Main() {
-        string filename = "./cratesActual.txt";
+        string filename = "./cratesSample.txt";
 
         List<List<char>> crates = GetCrateState(filename);
 
@@ -115,10 +119,8 @@ class Program {
         }
         Console.WriteLine();
 
-        foreach (List<int> instruction in instructions) {
-            for (int _ = 0; _ < instruction[0]; _++) {
-                DoInstruction(crates, instruction[1], instruction[2]);
-            }
+        foreach (List<int> ins in instructions) {
+            DoInstruction(crates, ins[0], ins[1], ins[2]);
         }
 
         // print crates
