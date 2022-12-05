@@ -12,7 +12,7 @@ class Program {
         return lines.Where((n, i) => i < delim).ToArray();
     }
 
-    private static List<char> ReadCrateState(string filename) {
+    private static List<List<char>> ReadCrateState(string filename) {
 
         string[] crateLines = ReadCrateLines(filename);
 
@@ -28,18 +28,19 @@ class Program {
         int colCount = (crateLines[0].Length + 1) / 4;
         int rowCount = crateLines.Length;
 
-        List<char> cratesAsList = new List<char>();
+        List<List<char>> cratesAsList = new List<List<char>>();
 
         for (int r = 0; r < rowCount-1; r++) {
             int rInd = r*4 + 1;
 
+            List<char> crateStack = new List<char>();
             for (int c = rowCount-2; c >= 0; c--) {
                 if (crateLines[c][rInd] != ' ') {
-                    Console.WriteLine(crateLines[c][rInd]);
+                    crateStack.Add(crateLines[c][rInd]);
                 }
             }
-            
-            Console.WriteLine();
+
+            cratesAsList.Add(crateStack);
         }
 
         return cratesAsList;
@@ -48,7 +49,14 @@ class Program {
     public static void Main() {
         string filename = "./cratesSample.txt";
 
-        List<char> crates = ReadCrateState(filename);
+        List<List<char>> crates = ReadCrateState(filename);
+
+        foreach (List<char> crateLine in crates) {
+            foreach (char crate in crateLine) {
+                Console.Write(crate + " ");
+            }
+            Console.WriteLine();
+        }
     }
 }
 
