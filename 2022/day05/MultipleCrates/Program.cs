@@ -95,7 +95,7 @@ class Program {
     }
 
     public static void Main() {
-        string filename = "./cratesSample.txt";
+        string filename = "./cratesActual.txt";
 
         List<List<char>> crates = GetCrateState(filename);
 
