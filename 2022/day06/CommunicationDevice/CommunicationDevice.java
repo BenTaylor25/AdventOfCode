@@ -46,7 +46,7 @@ public class CommunicationDevice {
             chars.add(fileString.charAt(i));
         }
 
-        return i+1;
+        return i;
     }
 
     public static void main(String[] args) {
