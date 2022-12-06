@@ -58,7 +58,7 @@ public class CommunicationDevice {
         // find the first group of 4 unique characters
         // return the index of the 4th (1-indexed)
 
-        String filename = "commSample5.txt";
+        String filename = "commActual.txt";
 
         String fileString = readFile(filename);
 
