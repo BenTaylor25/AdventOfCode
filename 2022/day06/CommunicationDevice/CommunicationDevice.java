@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -23,6 +24,12 @@ public class CommunicationDevice {
         return fileString;
     }
 
+    private static boolean allUnique(LinkedList<Character> chars) {
+
+        HashSet<Character> set = new HashSet<>(chars);
+
+        return set.size() == 4;
+    }  
 
     private static int findFirstUniqueQuad(String fileString) {
 
