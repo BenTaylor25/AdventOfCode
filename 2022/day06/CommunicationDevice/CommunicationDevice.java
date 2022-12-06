@@ -27,6 +27,10 @@ public class CommunicationDevice {
     private static boolean allUnique(LinkedList<Character> chars) {
 
         HashSet<Character> set = new HashSet<>(chars);
+        // System.out.println(chars);
+        // System.out.println(set);
+        // System.out.println(set.size());
+        // System.out.println();
 
         return set.size() == 4;
     }  
@@ -42,8 +46,8 @@ public class CommunicationDevice {
 
         while (!allUnique(chars)) {
             chars.removeFirst();
-            i++;
             chars.add(fileString.charAt(i));
+            i++;
         }
 
         return i;
@@ -54,7 +58,7 @@ public class CommunicationDevice {
         // find the first group of 4 unique characters
         // return the index of the 4th (1-indexed)
 
-        String filename = "commSample3.txt";
+        String filename = "commSample4.txt";
 
         String fileString = readFile(filename);
 
