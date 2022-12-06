@@ -56,7 +56,7 @@ public class UniqueMessage {
     public static void main(String[] args) {
         // the message is the first 14 unique
 
-        String filename = "commSample1.txt";
+        String filename = "commActual.txt";
 
         String fileString = readFile(filename);
 
