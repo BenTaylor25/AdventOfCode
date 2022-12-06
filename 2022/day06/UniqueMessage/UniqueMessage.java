@@ -32,7 +32,7 @@ public class UniqueMessage {
         // System.out.println(set.size());
         // System.out.println();
 
-        return set.size() == 4;
+        return set.size() == 14;
     }  
 
     private static int findFirstUniqueQuad(String fileString) {
@@ -40,7 +40,7 @@ public class UniqueMessage {
         LinkedList<Character> chars = new LinkedList<>();
 
         int i;
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 14; i++) {
             chars.add(fileString.charAt(i));
         }
 
@@ -54,9 +54,7 @@ public class UniqueMessage {
     }
 
     public static void main(String[] args) {
-        // given a string
-        // find the first group of 4 unique characters
-        // return the index of the 4th (1-indexed)
+        // the message is the first 14 unique
 
         String filename = "commSample1.txt";
 
