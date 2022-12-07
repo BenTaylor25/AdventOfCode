@@ -76,9 +76,9 @@ function readDirsAsArr(filename) {
     let obj = makeObj(lines);
     let arr = objToArr(obj)[0];
 
-    console.log(obj['/']);
-    console.log();
-    console.log(arr);
+    // console.log(obj['/']);
+    // console.log();
+    // console.log(arr);
 
     return arr;
 }
@@ -112,7 +112,7 @@ function getAllSums(dirsArr) {
 }
 
 function main() {
-    let dirsArr = readDirsAsArr('dirSample.txt');
+    let dirsArr = readDirsAsArr('dirActual.txt');
     let allSums = getAllSums(dirsArr);
     let filteredSums = allSums.filter(x => { return x <= 100000 });
     let filteredSumsSum = recSum(filteredSums);
