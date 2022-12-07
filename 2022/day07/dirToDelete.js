@@ -124,7 +124,7 @@ function min(arr) {
 }
 
 function main() {
-    let dirsArr = readDirsAsArr('dirSample.txt');
+    let dirsArr = readDirsAsArr('dirActual.txt');
     let allSums = getAllSums(dirsArr);
 
     let wholeFs = allSums[0];
