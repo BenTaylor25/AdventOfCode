@@ -76,14 +76,45 @@ function readDirsAsArr(filename) {
     let obj = makeObj(lines);
     let arr = objToArr(obj)[0];
 
-    console.log(obj['/']);
-    console.log();
-    console.log(arr);
+    // console.log(obj['/']);
+    // console.log();
+    // console.log(arr);
 
-    return; //
+    return arr;
+}
+
+function recSum(arr) {
+    sum = 0;
+
+    arr.forEach(num => {
+        if (typeof num == 'object') {   // Array
+            sum += recSum(num);
+        } else {
+            sum += num;
+        }
+    });
+
+    return sum;
+}
+
+function getAllSums(dirsArr) {
+    let allSums = [];
+    allSums.push(recSum(dirsArr))
+
+    dirsArr.forEach(item => {
+        if (typeof item == 'object') {   // Array
+            let recSums = getAllSums(item);
+            allSums.push(...recSums);
+        }
+    });
+
+    return allSums;
 }
 
 function main() {
-    let dirs = readDirsAsArr('dirSample.txt');
+    let dirsArr = readDirsAsArr('dirSample.txt');
+    let allSums = getAllSums(dirsArr);
+
+    console.log(allSums);
 }
 main();
