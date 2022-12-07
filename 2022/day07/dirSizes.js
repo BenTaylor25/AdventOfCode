@@ -114,7 +114,11 @@ function getAllSums(dirsArr) {
 function main() {
     let dirsArr = readDirsAsArr('dirSample.txt');
     let allSums = getAllSums(dirsArr);
+    let filteredSums = allSums.filter(x => { return x <= 100000 });
+    let filteredSumsSum = recSum(filteredSums);
 
-    console.log(allSums);
+    // console.log(allSums);
+    // console.log(filteredSums);
+    console.log(filteredSumsSum);
 }
 main();
