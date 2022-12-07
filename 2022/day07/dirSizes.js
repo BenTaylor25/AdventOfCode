@@ -38,7 +38,7 @@ function makeObj(lines) {
             if (lineArr[0] == 'dir') {
                 current[lineArr[1]] = {};
             } else {
-                current[lineArr[1]] = lineArr[0]
+                current[lineArr[1]] = --lineArr[0]
             }
         }
 
@@ -60,11 +60,25 @@ function makeObj(lines) {
     return base;
 }
 
+function objToArr(obj) {
+    if (typeof obj == 'object') {
+        let arr = [];
+        for (const [_, v] of Object.entries(obj)) {
+            arr.push(objToArr(v));
+        }
+        return arr;
+    }
+    return obj;
+}
+
 function readDirsAsArr(filename) {
     let lines = readCommands(filename);
     let obj = makeObj(lines);
+    let arr = objToArr(obj)[0];
 
     console.log(obj['/']);
+    console.log();
+    console.log(arr);
 
     return; //
 }
