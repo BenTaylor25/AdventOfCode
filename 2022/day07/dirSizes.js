@@ -38,7 +38,7 @@ function makeObj(lines) {
             if (lineArr[0] == 'dir') {
                 current[lineArr[1]] = {};
             } else {
-                current[lineArr[1]] = --lineArr[0]
+                current[lineArr[1]] = --lineArr[0] + 1
             }
         }
 
@@ -76,9 +76,9 @@ function readDirsAsArr(filename) {
     let obj = makeObj(lines);
     let arr = objToArr(obj)[0];
 
-    // console.log(obj['/']);
-    // console.log();
-    // console.log(arr);
+    console.log(obj['/']);
+    console.log();
+    console.log(arr);
 
     return arr;
 }
