@@ -35,12 +35,12 @@ int main() {
     read_ints("./treesSample.txt", &trees);
 
     // display trees
-    // for (int i = 0; i < SIZE; i++) {
-    //     for (int j = 0; j < SIZE; j++) {
-    //         printf("%d ", trees[i*SIZE + j]);
-    //     }
-    //     printf("\n");
-    // }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%d ", trees[i*SIZE + j]);
+        }
+        printf("\n");
+    }
 
     int visible = 0;
 
@@ -53,23 +53,25 @@ int main() {
             } else {
                 bool left_hidden = false;
                 for (int k = 0; k < j; k++) {
-                    left_hidden = left_hidden || trees[i*SIZE + k] > trees[i*SIZE + j];
+                    left_hidden = left_hidden || trees[i*SIZE + k] >= trees[i*SIZE + j];
                 }
 
                 bool right_hidden = false;
                 for (int k = j+1; k < SIZE; k++) {
-                    right_hidden = right_hidden || trees[i*SIZE + k] > trees[i*SIZE + j];
+                    right_hidden = right_hidden || trees[i*SIZE + k] >= trees[i*SIZE + j];
                 }
 
                 bool up_hidden = false;
                 for (int k = 0; k < i; k++) {
-                    up_hidden = up_hidden || trees[k*SIZE + j] > trees[i*SIZE + j];
+                    up_hidden = up_hidden || trees[k*SIZE + j] >= trees[i*SIZE + j];
                 }
 
                 bool down_hidden = false;
                 for (int k = i+1; k < SIZE; k++) {
-                    down_hidden = down_hidden || trees[k*SIZE + j] > trees[k*SIZE + j];
+                    down_hidden = down_hidden || trees[k*SIZE + j] >= trees[i*SIZE + j];
                 }
+
+                // printf("%d %d %d %d\n", left_hidden, right_hidden, up_hidden, down_hidden);
 
                 if (!(left_hidden && right_hidden && up_hidden && down_hidden)) {
                     visible++;
