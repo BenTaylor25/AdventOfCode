@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define SIZE 5
+#define SIZE 99
 
 void read_ints(const char* file_name, int ** arr)
 {
@@ -32,15 +32,15 @@ void read_ints(const char* file_name, int ** arr)
 
 int main() {
     int * trees = malloc(SIZE * SIZE * sizeof(int));
-    read_ints("./treesSample.txt", &trees);
+    read_ints("./treesActual.txt", &trees);
 
     // display trees
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            printf("%d ", trees[i*SIZE + j]);
-        }
-        printf("\n");
-    }
+    // for (int i = 0; i < SIZE; i++) {
+    //     for (int j = 0; j < SIZE; j++) {
+    //         printf("%d ", trees[i*SIZE + j]);
+    //     }
+    //     printf("\n");
+    // }
 
     int visible = 0;
 
