@@ -1,3 +1,8 @@
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
+
 fun abs(x: Int): Int {
     if (x < 0) {
         return -x;
@@ -10,7 +15,7 @@ class PositionSim (
     var heady: Int = 0,
     var tailx: Int = 0,
     var taily: Int = 0,
-    var tailVisited: Array<Int> = arrayOf()
+    var tailVisited: Array<Int> = arrayOf(0)
 ) {
 
     fun move(h: Int, v: Int) {
@@ -63,8 +68,31 @@ class PositionSim (
     }
 }
 
+fun readFile(filename: String): Array<String> {
+    val file = File(filename)
+    var arr: Array<String> = arrayOf()
+
+    try {
+        BufferedReader(FileReader(file)).use { br ->
+            var line: String?
+            while (br.readLine().also { line = it } != null) {
+                arr += line.toString()
+            }
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+
+    return arr
+}
+
 fun main() {
     var ps = PositionSim()
+
+    val fileArr = readFile("./ropeMoveSample.txt")
+    for (line in fileArr) {
+        println(line)
+    }
 
     ps.moveNorth(2)
 
