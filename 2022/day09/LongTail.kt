@@ -16,23 +16,47 @@ class Pos (
 ) {}
 
 class PositionSimLongTail (
-    var headPos: Pos,
-    var tailPos: Pos,
-    var tailVisited: Array<Pos> = arrayOf(Pos())
+    var ropePos: Array<Pos> = arrayOf(Pos(), Pos(), Pos(), Pos(), Pos(), Pos(), Pos(), Pos(), Pos(), Pos()),
+    var tailTipVisited: Array<Pos> = arrayOf(Pos())
 ) {
 
     fun move(h: Int, v: Int) {
-        var oldheadPos = headPos
+        var oldPos = ropePos[0]
 
-        headPos.x += h
-        headPos.y += v //
+        ropePos[0].x += h
+        ropePos[0].y += v
 
-        if (tailShouldMove()) {
-            tailx = oldheadx
-            taily = oldheady
+        var n = 1
+        var shouldMoveMore = true
+        while (n < 10 && shouldMoveMore) {
+            // get distance between n and n-1
+            val xdist = abs(ropePos[n].x - ropePos[n-1].x) 
+            val ydist = abs(ropePos[n].y - ropePos[n-1].y) 
 
-            if (!tailVisited.contains(tailx*10000 + taily)) {
-                tailVisited = tailVisited.plus(tailx*10000 + taily)
+            if (xdist <= 1 && ydist <= 1) {
+                shouldMoveMore = false
+            } else {
+                // n-1 X/Y Movement
+                val nm1XMov = ropePos[n-1].x - oldPos.x
+                val nm1YMov = ropePos[n-1].y - oldPos.y
+
+                // bool n-1 moved diag?
+                val nm1MovedDiag = nm1XMov != 0 && nm1YMov != 0
+
+                val temp = ropePos[n]
+                if (nm1MovedDiag) {
+                    ropePos[n].x += nm1XMov
+                    ropePos[n].y += nm1YMov
+                } else {
+                    ropePos[n] = oldPos
+                }
+                oldPos = temp
+
+                if (n == 9 && !tailTipVisited.contains(ropePos[n])) {
+                    tailTipVisited.plus(ropePos[n])
+                }
+
+                n += 1
             }
         }
     }
@@ -61,12 +85,8 @@ class PositionSimLongTail (
         }
     }
 
-    fun tailShouldMove(): Boolean {
-        return abs(tailx - headx) > 1 || abs(taily - heady) > 1
-    }
-
     fun getSetSize(): Int {
-        return tailVisited.count()
+        return tailTipVisited.count()
     }
 }
 
@@ -89,9 +109,9 @@ fun readFile(filename: String): Array<String> {
 }
 
 fun main() {
-    var ps = PositionSim()
+    var ps = PositionSimLongTail()
 
-    val fileArr = readFile("./ropeMoveActual.txt")
+    val fileArr = readFile("./ropeMoveSample.txt")
     for (line in fileArr) {
         var linesplit = line.split(" ")
 
