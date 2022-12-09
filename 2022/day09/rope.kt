@@ -91,10 +91,23 @@ fun main() {
 
     val fileArr = readFile("./ropeMoveSample.txt")
     for (line in fileArr) {
-        println(line)
-    }
+        var linesplit = line.split(" ")
 
-    ps.moveNorth(2)
+        when (linesplit[0]) {
+            "U" -> {
+                ps.moveNorth(Integer.parseInt(linesplit[1]))
+            }
+            "D" -> {
+                ps.moveSouth(Integer.parseInt(linesplit[1]))
+            }
+            "L" -> {
+                ps.moveWest(Integer.parseInt(linesplit[1]))
+            }
+            "R" -> {
+                ps.moveEast(Integer.parseInt(linesplit[1]))
+            }
+        }
+    }
 
     println(ps.getSetSize())
 }
