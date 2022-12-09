@@ -89,7 +89,7 @@ fun readFile(filename: String): Array<String> {
 fun main() {
     var ps = PositionSim()
 
-    val fileArr = readFile("./ropeMoveSample.txt")
+    val fileArr = readFile("./ropeMoveActual.txt")
     for (line in fileArr) {
         var linesplit = line.split(" ")
 
