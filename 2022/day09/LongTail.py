@@ -46,16 +46,15 @@ def multi_knot_visited(knots: int, motions: list[tuple[str, int]]) -> int:
             if chain[-1] not in visited:
                 visited.append(chain[-1]) 
 
-    print(visited)
+    # print(visited)
 
-    return len(visited)
+    print(len(visited))
 
 def run() -> None:
-    with open("ropeMoveSample2.txt") as f:
+    with open("ropeMoveActual.txt") as f:
         motions = [(move, int(dist)) for move, dist in (line.rstrip().split(" ") for line in f)]
 
     multi_knot = multi_knot_visited(10, motions)
-    print(f'Positions visited (10 knots): {multi_knot}')
 
 if __name__ == '__main__':
     run()
