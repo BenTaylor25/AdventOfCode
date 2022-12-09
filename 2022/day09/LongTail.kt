@@ -21,7 +21,9 @@ class PositionSimLongTail (
 ) {
 
     fun move(h: Int, v: Int) {
-        var oldPos = ropePos[0]
+        var oldPos = Pos()
+        oldPos.x = ropePos[0].x
+        oldPos.y = ropePos[0].y
 
         ropePos[0].x += h
         ropePos[0].y += v
@@ -32,6 +34,7 @@ class PositionSimLongTail (
             // get distance between n and n-1
             val xdist = abs(ropePos[n].x - ropePos[n-1].x) 
             val ydist = abs(ropePos[n].y - ropePos[n-1].y) 
+            println("" + xdist + " " + ydist)
 
             if (xdist <= 1 && ydist <= 1) {
                 shouldMoveMore = false
@@ -43,22 +46,28 @@ class PositionSimLongTail (
                 // bool n-1 moved diag?
                 val nm1MovedDiag = nm1XMov != 0 && nm1YMov != 0
 
-                val temp = ropePos[n]
+                val temp = Pos()
+                temp.x = ropePos[n].x
+                temp.y = ropePos[n].y
+
                 if (nm1MovedDiag) {
+                    println("copy diag n:" + n)
                     ropePos[n].x += nm1XMov
                     ropePos[n].y += nm1YMov
                 } else {
+                    println("take old pos")
                     ropePos[n] = oldPos
                 }
                 oldPos = temp
 
                 if (n == 9 && !tailTipVisited.contains(ropePos[n])) {
-                    tailTipVisited.plus(ropePos[n])
+                    tailTipVisited += ropePos[n]
                 }
 
                 n += 1
             }
         }
+        println()
     }
 
     fun moveNorth(times: Int) {
