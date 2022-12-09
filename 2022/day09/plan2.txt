@@ -11,6 +11,9 @@ if dist(n, ahead) > moveDistance {
     if ahead movedDiagonally {
         n.move = ahead.move   // e.g. up/right
         do n.move
+
+        unless n-1 is diagonal of n?
+            then take pos between?
     } else {
         n.pos = ahead.oldPos
     }

@@ -34,31 +34,39 @@ class PositionSimLongTail (
             // get distance between n and n-1
             val xdist = abs(ropePos[n].x - ropePos[n-1].x) 
             val ydist = abs(ropePos[n].y - ropePos[n-1].y) 
-            println("" + xdist + " " + ydist)
+            // println("" + xdist + " " + ydist)
 
             if (xdist <= 1 && ydist <= 1) {
                 shouldMoveMore = false
             } else {
-                // n-1 X/Y Movement
-                val nm1XMov = ropePos[n-1].x - oldPos.x
-                val nm1YMov = ropePos[n-1].y - oldPos.y
 
-                // bool n-1 moved diag?
-                val nm1MovedDiag = nm1XMov != 0 && nm1YMov != 0
-
-                val temp = Pos()
-                temp.x = ropePos[n].x
-                temp.y = ropePos[n].y
-
-                if (nm1MovedDiag) {
-                    println("copy diag n:" + n)
-                    ropePos[n].x += nm1XMov
-                    ropePos[n].y += nm1YMov
-                } else {
-                    println("take old pos")
-                    ropePos[n] = oldPos
+                if (ropePos[n].y == ropePos[n-1].y) {
+                    if (ropePos[n].x < ropePos[n-1].x) {
+                        ropePos[n].x += 1
+                    } else {
+                        ropePos[n].x -= 1
+                    }
                 }
-                oldPos = temp
+                else if (ropePos[n].x == ropePos[n-1].x) {
+                    if (ropePos[n].y < ropePos[n-1].y) {
+                        ropePos[n].y += 1
+                    } else {
+                        ropePos[n].y -= 1
+                    }
+                }
+                else {
+                    if (ropePos[n].x < ropePos[n-1].x) {
+                        ropePos[n].x += 1
+                    } else {
+                        ropePos[n].x -= 1
+                    }
+
+                    if (ropePos[n].y < ropePos[n-1].y) {
+                        ropePos[n].y += 1
+                    } else {
+                        ropePos[n].y -= 1
+                    }
+                }
 
                 if (n == 9 && !tailTipVisited.contains(ropePos[n])) {
                     tailTipVisited += ropePos[n]
@@ -67,7 +75,7 @@ class PositionSimLongTail (
                 n += 1
             }
         }
-        println()
+        // println()
     }
 
     fun moveNorth(times: Int) {
@@ -122,6 +130,7 @@ fun main() {
 
     val fileArr = readFile("./ropeMoveSample2.txt")
     for (line in fileArr) {
+        // println("LINE: " + line)
         var linesplit = line.split(" ")
 
         when (linesplit[0]) {
