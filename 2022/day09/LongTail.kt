@@ -111,7 +111,7 @@ fun readFile(filename: String): Array<String> {
 fun main() {
     var ps = PositionSimLongTail()
 
-    val fileArr = readFile("./ropeMoveSample.txt")
+    val fileArr = readFile("./ropeMoveSample2.txt")
     for (line in fileArr) {
         var linesplit = line.split(" ")
 
