@@ -1,0 +1,55 @@
+
+class PositionSim {
+    headx int
+    heady int
+    tailx int
+    taily int
+    tailVisited mapset
+
+    move(h, v) {
+        oldheadx int
+        oldheady int
+
+        headx += h
+        heady += v
+
+        if (tailShouldMove()) {
+            tailx = oldheadx;
+            taily = oldheady;
+
+            tailVisited.addIfUnique( [tailx, taily] )
+        }
+    }
+
+    moveNorth(t int) {
+        loop t times {
+            move(0, 1);
+        }
+    }
+    moveSouth() {...}
+    moveEast() {...}
+    moveWest() {...}
+
+    tailShouldMove() {
+        return abs(tailx-headx) > 1 || abs(taily-heady) > 1;
+    }
+
+}
+
+
+main() {
+    ps PositionSim
+
+    for line in file {
+        linesplit = line.split(' ')
+
+        if linesplit[0] == 'N' {
+            ps.moveNorth(int(linesplit[1])
+        }
+        if linesplit[0] == 'S'
+            ...
+        ...
+    }
+
+    print( ps.tailVisited.size )
+}
