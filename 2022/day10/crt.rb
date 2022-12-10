@@ -12,6 +12,7 @@ def main
     filelines = readfile "signalSample2.txt"
 
     cycle = 1
+    position = 0
     fileind = 0
     x = 1
     searching = false
@@ -21,12 +22,13 @@ def main
     # puts "x: #{x}  cycle: #{cycle}"
     while fileind < filelines.length()
         char = "."
-        if (cycle%40)-1 >= x-1 && (cycle%40)-1 <= x+1
+        if position >= x-1 && position <= x+1
             char = "#"
         end
         print char
         $stdout.flush
-        if (cycle % 40 == 0)
+        if (position == 39)
+            position = -1
             print "\n"
         end
 
@@ -43,6 +45,7 @@ def main
         end
 
         cycle += 1
+        position += 1
 
         if searching
             if cycle == cycle_to_stop_search
