@@ -9,7 +9,10 @@ end
 
 
 def main
-    filelines = readfile "signalSample1.txt"
+    filelines = readfile "signalSample2.txt"
+
+    important_cycles = [20, 60, 100, 140, 180, 220]
+    important_signal_strengths = []
 
     cycle = 1
     fileind = 0
@@ -21,9 +24,16 @@ def main
     # puts "x: #{x}  cycle: #{cycle}"
     while fileind < filelines.length()
 
-        if cycle == 6
-            puts "start of cycle #{cycle}"
-            puts "x: #{x}"
+        for i in 0..important_cycles.length()-1
+            if cycle == important_cycles[i]
+                # puts
+                # puts "start of cycle #{cycle}"
+                # puts "x: #{x}"
+
+                signal_strength = cycle * x
+                puts "signal strength: #{signal_strength}"
+                important_signal_strengths.append(signal_strength)
+            end
         end
 
         if !searching
@@ -48,5 +58,8 @@ def main
             end
         end
     end
+    puts
+
+    puts "sum of signal strengths: #{important_signal_strengths.sum}"
 end
 main
