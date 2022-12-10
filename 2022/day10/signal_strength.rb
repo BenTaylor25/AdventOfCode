@@ -9,7 +9,7 @@ end
 
 
 def main
-    filelines = readfile "signalSample2.txt"
+    filelines = readfile "signalActual.txt"
 
     important_cycles = [20, 60, 100, 140, 180, 220]
     important_signal_strengths = []
