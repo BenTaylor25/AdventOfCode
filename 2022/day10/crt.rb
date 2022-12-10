@@ -9,7 +9,7 @@ end
 
 
 def main
-    filelines = readfile "signalSample2.txt"
+    filelines = readfile "signalActual.txt"
 
     cycle = 1
     position = 0
