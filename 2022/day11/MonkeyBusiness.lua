@@ -18,6 +18,12 @@ function lines_from(file)
   return lines
 end
 
+function tablelen(t)
+    local count = 0
+    for _ in pairs(t) do count = count + 1 end
+    return count
+end
+
 -- tests the functions above
 local file = 'monkeysSample.txt'
 local lines = lines_from(file)
@@ -25,10 +31,14 @@ local lines = lines_from(file)
 -- print all line numbers and their contents
 for k,v in pairs(lines) do
     local linesplit = {}
-    for word in v:gmatch("%w+") do table.insert(linesplit, word) end
-    
+    for word in v:gmatch("%S+") do table.insert(linesplit, word) end
+
+    if tablelen(linesplit) == 0 then
+        print()
+    end
+
     for k2, w in pairs(linesplit) do
         print(w)
     end
-    print()
+    print("-")
 end
