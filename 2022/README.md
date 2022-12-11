@@ -13,25 +13,25 @@ Day 07: JavaScript
 Day 08: C  
 Day 09: Kotlin  
 Day 10: Ruby  
-Day 11: C++  
-Day 12: Swift  
-Day 13: Lua  
-Day 14: TypeScript  
-Day 15: Visual Basic  
+Day 11: Lua
+Day 12: C++
+Day 13: Rust
+Day 14: Go
+Day 15: C#
 Day 16: Dart  
-Day 17: Go  
-Day 18: Rust  
+Day 17: Rust  
+Day 18: Go  
 Day 19: C#  
 Day 20: Dart  
-Day 21: Go  
-Day 22: Rust  
+Day 21: Rust  
+Day 22: Go  
 Day 23: C#  
 Day 24: Dart  
-Day 25: Random(15)  
+Day 25: Random(12)  
 
-15 languages for the first 15 days.  
+12 languages for the first 12 days.  
 Dart and Rust are languages that I'm actively learning at the moment, so a bias towards those for the last 10 days (especially Dart because I have less experience there).  
 I will be working with C# in the near future, so I want to build up some proficiency.  
 Go and Rust are languages that I'm especially excited about the future of, so I want to focus on both.  
 Python, Java, JavaScript, C, and C++ are all languages that I have a good amount of experience in already.  
-Kotlin, Ruby, Swift, Lua, and VB are going to be completely new to me.
+Kotlin, Ruby, and Lua are going to be completely new to me.
