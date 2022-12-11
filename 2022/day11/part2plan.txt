@@ -1,0 +1,59 @@
+
+I confess to being stuck on the overflow-handling part of this problem,
+but I have found a hint and am going to try to justify that it is valid.
+
+
+If you're interested in bignumber % m
+where bignumber will grow and eventually overflow
+and m is a small selection of numbers 
+(e.g. if m = 4|5|6 you're interested in %4, %5, and %6)
+you can find the LCM of m and have
+bignumber = bignumber % LCM(m)
+
+For one, I assume that it could work with any common multiple,
+though of course, if that multiple is greater than the highest
+representable number, that's not going to be useful.
+
+
+let b = bignumber
+let m<n> = modulos of interest
+
+consider
+:
+b = b + 5
+b % m1
+.
+vs
+.
+b = b + 3
+b = b % LCM(m)
+b % m1
+:
+this is tricky to parse, so let's check with an example
+let b = 5000
+let m = { 3, 4 }
+therefore LCM(m) = 12
+:
+5003 % 3 = 2
+5003 % 12 = 11 -> 11 % 3 = 2
+:
+with the eample it's easier to see that %LCM will not alter the %mx
+
+
+but for a multiplication (e.g. b = b * b)
+is
+    b = b * b
+    b % m1
+the same as
+    b = b % LCM   // from previous operation
+    b = b * b
+    b = b % LCM
+    b % m1
+?
+let's try the example again
+:
+5003 * 5003 = 25030009 -> 25030009 % 3 = 1
+5003 % 12 = 11 -> 11 * 11 = 121 -> 121 % 12 = 1 -> 1 % 3 = 1
+
+
+I'm not sure I could prove this for all cases, but this has given me the faith to try it.
