@@ -26,7 +26,7 @@ function intof(s)
     return tonumber(nocomma)
 end
 
-local file = 'monkeysSample.txt'
+local file = 'monkeysActual.txt'
 local lines = lines_from(file)
 local monkeyArrStruct = {}
 local allInds = {}
