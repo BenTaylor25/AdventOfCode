@@ -42,6 +42,7 @@ for k,v in pairs(lines) do
         currentInd = linesplit[2]
         monkeyArrStruct[currentInd] = {}
         monkeyArrStruct[currentInd]["items"] = {}
+        monkeyArrStruct[currentInd]["truefalse"] = {}
 
     elseif linesplit[1] == "Starting" then
         for i, v in pairs(linesplit) do
@@ -63,8 +64,7 @@ for k,v in pairs(lines) do
         ]], linesplit[4]))
     
     elseif linesplit[1] == "If" then
-        return linesplit[6]
-
+        table.insert(monkeyArrStruct[currentInd]["truefalse"], linesplit[6])
     end
 
     for k2, w in pairs(linesplit) do
@@ -74,8 +74,6 @@ for k,v in pairs(lines) do
 
 end
 
--- why aren't these 3 lines printing??
-print("?")
+
 print(monkeyArrStruct[currentInd]["tst"](monkeyArrStruct[currentInd]["op"](14)))
-print("?")
 
