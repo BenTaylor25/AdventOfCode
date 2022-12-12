@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <climits>
 
 using std::vector;
 using std::string;
@@ -69,7 +70,10 @@ bool is_valid_neighbour(vector<vector<int>>* elevations, int* from, int* to) {
 vector<int*> get_neigbours(vector<vector<int>>* elevations, int* from) {
     vector<int*> neighbours;
 
-    int *up, *down, *left, *right;
+    int *up = new int[2];
+    int *down = new int[2];
+    int *left = new int[2];
+    int *right = new int[2];
 
     up[0] = from[0]-1;
     up[1] = from[1];
@@ -98,18 +102,82 @@ vector<int*> get_neigbours(vector<vector<int>>* elevations, int* from) {
     return neighbours;
 }
 
+int dijkstras_alg(vector<vector<int>>* elevations, int *start, int *end) {
+    int dist[(*elevations).size()][(*elevations)[0].size()];
+    int prev[(*elevations).size()][(*elevations)[0].size()][2];
+    bool visited[(*elevations).size()][(*elevations)[0].size()];
+    double unvisited_dist[(*elevations).size()][(*elevations)[0].size()];
+    for (int r = 0; r < (*elevations).size(); r++) {
+        for (int c = 0; c < (*elevations)[0].size(); c++) {
+            visited[r][c] = false;
+            unvisited_dist[r][c] = INT_MAX;
+            prev[r][c][0] = -1;
+            prev[r][c][1] = -1;
+        }
+    }
+    unvisited_dist[start[0]][start[1]] = 0;
+
+    while (!visited[end[0]][end[1]]) {
+        int x[]{0, 0};
+        while (visited[x[0]][x[1]]) {
+            x[1]++;
+            if (x[1] > (*elevations)[0].size()) {
+                x[1] = 0;
+                x[0]++;
+            }
+        }
+
+        for (int r = 0; r < (*elevations).size(); r++) {
+            for (int c = 0; c < (*elevations)[0].size(); c++) {
+                if (!visited[r][c]) {
+                    if (unvisited_dist[r][c] < unvisited_dist[x[0]][x[1]]) {
+                        x[0] = r;
+                        x[1] = c;
+                    }
+                }
+            }
+        }
+
+        visited[x[0]][x[1]] = true;
+
+        if (!(x[0] == end[0] && x[1] == end[1])) {
+            auto neighbours = get_neigbours(elevations, x);
+
+            for (int *n : neighbours) {
+                if (!visited[n[0]][n[1]]) {
+                    double dist_of_arc = 1;   // adjacent
+                    double current_dist = unvisited_dist[x[0]][x[1]] + dist_of_arc;
+                    if (current_dist < unvisited_dist[n[0]][n[1]]) {
+                        unvisited_dist[n[0]][n[1]] = current_dist;
+                        prev[n[0]][n[1]][0] = x[0];
+                        prev[n[0]][n[1]][1] = x[1];
+                    }
+                }
+            }
+            for (int *i : neighbours) {
+                delete i;
+            }
+        }
+    }
+    return dist[end[0]][end[1]];
+}
+
 int main() {
     auto elevations = read_elevations("./elevationSample.txt");
     int *start = get_start(&elevations);
     int *end = get_end(&elevations);
 
-    std::cout << "y: " << start[0] << ", x: " << start[1] << std::endl;
-    std::cout << "y: " << end[0] << ", x: " << end[1] << std::endl << std::endl;
+    int shortest = dijkstras_alg(&elevations, start, end);
 
-    for (vector<int> x : elevations) {
-        for (int y : x) {
-            std::cout << y << "  ";
-        }
-        std::endl(std::cout);
-    }
+    std::cout << shortest << std::endl;
+
+    // std::cout << "y: " << start[0] << ", x: " << start[1] << std::endl;
+    // std::cout << "y: " << end[0] << ", x: " << end[1] << std::endl << std::endl;
+
+    // for (vector<int> x : elevations) {
+    //     for (int y : x) {
+    //         std::cout << y << "  ";
+    //     }
+    //     std::endl(std::cout);
+    // }
 }
