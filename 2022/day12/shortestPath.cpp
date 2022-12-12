@@ -58,6 +58,46 @@ int * get_end(vector<vector<int>>* elevations) {
     return end;
 }
 
+bool is_valid_neighbour(vector<vector<int>>* elevations, int* from, int* to) {
+    // assume from is in grid
+    if (to[0] < 0 || to[0] > elevations->size() || to[1] < 0 || to[1] > elevations[0].size()) {
+        return false;   // out of grid
+    }
+    return (*elevations)[from[0]][from[1]] + 1 <= (*elevations)[to[0]][to[1]];
+}
+
+vector<int*> get_neigbours(vector<vector<int>>* elevations, int* from) {
+    vector<int*> neighbours;
+
+    int *up, *down, *left, *right;
+
+    up[0] = from[0]-1;
+    up[1] = from[1];
+    if (is_valid_neighbour(elevations, from, up)) {
+        neighbours.push_back(up);
+    }
+
+    down[0] = from[0]+1;
+    down[1] = from[1];
+    if (is_valid_neighbour(elevations, from, down)) {
+        neighbours.push_back(down);
+    }
+
+    left[0] = from[0];
+    left[1] = from[1]-1;
+    if (is_valid_neighbour(elevations, from, left)) {
+        neighbours.push_back(left);
+    }
+
+    right[0] = from[0];
+    right[1] = from[1]+1;
+    if (is_valid_neighbour(elevations, from, right)) {
+        neighbours.push_back(right);
+    }
+
+    return neighbours;
+}
+
 int main() {
     auto elevations = read_elevations("./elevationSample.txt");
     int *start = get_start(&elevations);
