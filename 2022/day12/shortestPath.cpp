@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <climits>
+#include <algorithm>
 
 using std::vector;
 using std::string;
@@ -175,7 +176,43 @@ vector<int*> get_neigbours(vector<vector<int>>* elevations, int* from) {
 // }
 
 int bfs_find_dist(vector<vector<int>>* elevations, int *start, int *end) {
-    
+    vector<int*> q;
+    vector<int*> ls;
+
+    q.insert(q.begin(), start);
+
+    int dist = 0;
+    while (q.size() > 0) {
+        dist++;
+        int* s = q.back();
+
+        if (!std::count(ls.begin(), ls.end(), s)) {
+            ls.insert(ls.begin(), s);
+
+            auto neighbours = get_neigbours(elevations, s);
+            std::cout << neighbours.size() << std::endl;
+
+            for (int *n : neighbours) {
+                bool contains = false;
+                for (int *l : ls) {
+                    if (l[0] == n[0] && l[1] == n[1]) {
+                        contains = true;
+                    }
+                }
+                if (!contains) {
+                    q.insert(q.begin(), n);
+                } 
+            }
+
+            for (int *i : neighbours) {
+                delete i;
+            }
+        }
+
+        q.pop_back();
+    }
+
+    return dist;
 }
 
 int main() {
