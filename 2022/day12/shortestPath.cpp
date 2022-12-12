@@ -102,64 +102,80 @@ vector<int*> get_neigbours(vector<vector<int>>* elevations, int* from) {
     return neighbours;
 }
 
-int dijkstras_alg(vector<vector<int>>* elevations, int *start, int *end) {
-    int dist[(*elevations).size()][(*elevations)[0].size()];
-    int prev[(*elevations).size()][(*elevations)[0].size()][2];
-    bool visited[(*elevations).size()][(*elevations)[0].size()];
-    double unvisited_dist[(*elevations).size()][(*elevations)[0].size()];
-    for (int r = 0; r < (*elevations).size(); r++) {
-        for (int c = 0; c < (*elevations)[0].size(); c++) {
-            visited[r][c] = false;
-            unvisited_dist[r][c] = INT_MAX;
-            prev[r][c][0] = -1;
-            prev[r][c][1] = -1;
-        }
-    }
-    unvisited_dist[start[0]][start[1]] = 0;
+// int dijkstras_alg(vector<vector<int>>* elevations, int *start, int *end) {
+//     int dist[(*elevations).size()][(*elevations)[0].size()];
+//     int prev[(*elevations).size()][(*elevations)[0].size()][2];
+//     bool visited[(*elevations).size()][(*elevations)[0].size()];
+//     double unvisited_dist[(*elevations).size()][(*elevations)[0].size()];
+//     for (int r = 0; r < (*elevations).size(); r++) {
+//         for (int c = 0; c < (*elevations)[0].size(); c++) {
+//             visited[r][c] = false;
+//             unvisited_dist[r][c] = INT_MAX;
+//             prev[r][c][0] = -1;
+//             prev[r][c][1] = -1;
+//         }
+//     }
+//     unvisited_dist[start[0]][start[1]] = 0;
 
-    while (!visited[end[0]][end[1]]) {
-        int x[]{0, 0};
-        while (visited[x[0]][x[1]]) {
-            x[1]++;
-            if (x[1] > (*elevations)[0].size()) {
-                x[1] = 0;
-                x[0]++;
-            }
-        }
+//     while (!visited[end[0]][end[1]]) {
+//         int x[]{0, 0};
+//         while (visited[x[0]][x[1]]) {
+//             x[1]++;
+//             if (x[1] > (*elevations)[0].size()) {
+//                 x[1] = 0;
+//                 x[0]++;
+//             }
+//         }
 
-        for (int r = 0; r < (*elevations).size(); r++) {
-            for (int c = 0; c < (*elevations)[0].size(); c++) {
-                if (!visited[r][c]) {
-                    if (unvisited_dist[r][c] < unvisited_dist[x[0]][x[1]]) {
-                        x[0] = r;
-                        x[1] = c;
-                    }
-                }
-            }
-        }
+//         for (int r = 0; r < (*elevations).size(); r++) {
+//             for (int c = 0; c < (*elevations)[0].size(); c++) {
+//                 if (!visited[r][c]) {
+//                     if (unvisited_dist[r][c] < unvisited_dist[x[0]][x[1]]) {
+//                         x[0] = r;
+//                         x[1] = c;
+//                     }
+//                 }
+//             }
+//         }
 
-        visited[x[0]][x[1]] = true;
+//         visited[x[0]][x[1]] = true;
 
-        if (!(x[0] == end[0] && x[1] == end[1])) {
-            auto neighbours = get_neigbours(elevations, x);
+//         if (!(x[0] == end[0] && x[1] == end[1])) {
+//             auto neighbours = get_neigbours(elevations, x);
 
-            for (int *n : neighbours) {
-                if (!visited[n[0]][n[1]]) {
-                    double dist_of_arc = 1;   // adjacent
-                    double current_dist = unvisited_dist[x[0]][x[1]] + dist_of_arc;
-                    if (current_dist < unvisited_dist[n[0]][n[1]]) {
-                        unvisited_dist[n[0]][n[1]] = current_dist;
-                        prev[n[0]][n[1]][0] = x[0];
-                        prev[n[0]][n[1]][1] = x[1];
-                    }
-                }
-            }
-            for (int *i : neighbours) {
-                delete i;
-            }
-        }
-    }
-    return dist[end[0]][end[1]];
+//             for (int *n : neighbours) {
+//                 if (!visited[n[0]][n[1]]) {
+//                     double dist_of_arc = 1;   // adjacent
+//                     double current_dist = unvisited_dist[x[0]][x[1]] + dist_of_arc;
+//                     if (current_dist < unvisited_dist[n[0]][n[1]]) {
+//                         unvisited_dist[n[0]][n[1]] = current_dist;
+//                         prev[n[0]][n[1]][0] = x[0];
+//                         prev[n[0]][n[1]][1] = x[1];
+//                     }
+//                 }
+//             }
+//             for (int *i : neighbours) {
+//                 delete i;
+//             }
+//         }
+//     }
+
+//     int c = 0;
+//     int p0 = prev[end[0]][end[1]][0];
+//     int p1 = prev[end[0]][end[1]][1];
+//     while (p0 != -1) {
+//         c++;
+//         int _p0 = p0;
+//         p0 = prev[_p0][p1][0];
+//         p1 = prev[_p0][p1][1];
+//     }
+//     return c;
+
+//     // return dist[end[0]][end[1]];
+// }
+
+int bfs_find_dist(vector<vector<int>>* elevations, int *start, int *end) {
+    
 }
 
 int main() {
@@ -167,7 +183,7 @@ int main() {
     int *start = get_start(&elevations);
     int *end = get_end(&elevations);
 
-    int shortest = dijkstras_alg(&elevations, start, end);
+    int shortest = bfs_find_dist(&elevations, start, end);
 
     std::cout << shortest << std::endl;
 
