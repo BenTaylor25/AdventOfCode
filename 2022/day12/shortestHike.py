@@ -70,7 +70,7 @@ def bfs_find_dist(elevations, start, end):
     return counter
 
 def main():
-    elevations = read_elevations("./elevationSample.txt")
+    elevations = read_elevations("./elevationActual.txt")
     start, end = get_start_end(elevations)
 
     shortest = shortest = bfs_find_dist(elevations, start, end)
