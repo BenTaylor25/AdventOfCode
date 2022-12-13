@@ -57,7 +57,7 @@ def compare_lists(a, b):
 
 
 def right_order():
-    pairs = get_pairs("packetsSample.txt")
+    pairs = get_pairs("packetsActual.txt")
     right_pairs = []
 
     current_pair = 0
