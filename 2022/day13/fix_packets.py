@@ -63,7 +63,7 @@ def sort_packets(pairs):
     return packets
 
 def fix_packets():
-    pairs = get_pairs("packetsSample.txt")
+    pairs = get_pairs("packetsActual.txt")
     sorted_packets = sort_packets(pairs)
 
     div_1 = sorted_packets.index([[2]]) + 1
