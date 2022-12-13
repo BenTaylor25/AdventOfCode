@@ -66,8 +66,10 @@ def fix_packets():
     pairs = get_pairs("packetsSample.txt")
     sorted_packets = sort_packets(pairs)
 
-    for packet in sorted_packets:
-        print(packet)
+    div_1 = sorted_packets.index([[2]]) + 1
+    div_2 = sorted_packets.index([[6]]) + 1
+
+    print(div_1 * div_2)
 
 if __name__ == '__main__':
     fix_packets()
