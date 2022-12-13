@@ -1,3 +1,4 @@
+INT_TYPE = type(1)
 LIST_TYPE = type(list())
 
 def get_lines(filename):
@@ -24,37 +25,27 @@ def get_pairs(filename):
     return all_pairs
 
 def compare_lists(a, b):
-    assert type(a) == LIST_TYPE
-    assert type(b) == LIST_TYPE
-    zab = list(zip(a, b))
+    if type(a) == type(b) == INT_TYPE:
+        if a < b:
+            return 1
+        if a > b:
+            return -1
+        return 0
+    else:
+        if type(a) == INT_TYPE:
+            a = [a]
+        if type(b) == INT_TYPE:
+            b = [b]
 
-    i = -1
-    comp_value = 0
-    while comp_value == 0 and i < min(len(a), len(b))-1:
-        i += 1
-        ai, bi = zab[i]
+        for cl in [compare_lists(ai, bi) for ai, bi in zip(a,b)]:
+            if cl != 0:
+                return cl
 
-        if type(ai) == type(bi) == LIST_TYPE:
-            comp_value = compare_lists(ai, bi)
-        elif type(ai) == LIST_TYPE:
-            comp_value = compare_lists(ai, [bi])
-        elif type(bi) == LIST_TYPE:
-            comp_value = compare_lists([ai], bi)
-        else:
-            # both int
-            if ai < bi:
-                comp_value = 1
-            elif ai > bi:
-                comp_value = -1
-
-    if comp_value == 0:
-        if i == len(a) - 1:
-            comp_value = 1
-        else:
-            comp_value = -1
-
-    return comp_value
-
+        if len(a) < len(b):
+            return 1
+        if len(a) > len(b):
+            return -1
+        return 0
 
 def right_order():
     pairs = get_pairs("packetsActual.txt")
@@ -63,9 +54,10 @@ def right_order():
     current_pair = 0
     for pair in pairs:
         current_pair += 1
-        if compare_lists(pair[0], pair[1]) == 1:
+        if compare_lists(pair[0], pair[1]) in [0, 1]:
             right_pairs.append(current_pair)
     
+    print(right_pairs)
     print(sum(right_pairs))
 
 
