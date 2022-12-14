@@ -45,6 +45,7 @@ func createEmptyGrid(displaySize int) [][]string {
 func populateGrid(grid [][]string, lines []string, displaySize int) [][]string {
 	leftX := 500 - displaySize
 
+	grid[0][displaySize] = "+"
 
 	for _, line := range lines {
 		linesplit := strings.Split(line, " -> ")
@@ -77,12 +78,60 @@ func populateGrid(grid [][]string, lines []string, displaySize int) [][]string {
 	return grid
 }
 
+func isAbyssSand(grid [][]string, sandCol int) bool {
+	for c := 0; c < len(grid[0]); c++ {
+		colHasSand := c == sandCol
+		colHasBlock := false
+		for r := 0; r < len(grid); r++ {
+			if grid[r][c] == "o" {
+				colHasSand = true
+			} else if grid[r][c] == "#" {
+				colHasBlock = true
+			}
+		}
+		if (colHasSand && !colHasBlock) {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
 	lines := getLines("rockSample.txt")
 	displaySize := 7   // how far left/right from centre
+	leftX := 500 - displaySize
 
 	grid := createEmptyGrid(displaySize)
 	grid = populateGrid(grid, lines, displaySize)
+
+	counter := 0
+	_isAbyssSand := false
+	for !_isAbyssSand {
+		sandActive := true
+		sandX := 500
+		sandY := 0
+		for sandActive {
+			if grid[sandY+1][sandX-leftX] == "." {
+				sandY++
+			} else if grid[sandY+1][sandX-leftX-1] == "." {
+				sandY++
+				sandX--
+			} else if grid[sandY+1][sandX-leftX+1] == "." {
+				sandY++
+				sandX++
+			} else {
+				sandActive = false
+			}
+
+			if (isAbyssSand(grid, sandX-leftX)) {
+				_isAbyssSand = true
+				sandActive = false
+				counter--
+			}
+		}
+		grid[sandY][sandX-leftX] = "o"
+		counter++
+	}
 
 	fmt.Println()
 	for _, row := range grid {
@@ -91,4 +140,6 @@ func main() {
 		}
 		fmt.Println()
 	}
+
+	fmt.Println(counter)
 }
