@@ -24,10 +24,32 @@ func getLines(filename string) []string {
 	return lines
 }
 
-func main() {
-	lines := getLines("rockSample.txt")
+func createEmptyGrid(displaySize int) [][]string {
+	var grid [][]string
 
-	for _, line := range lines {
-		fmt.Println(line)
+	for x := 0; x < displaySize*2+1; x++ {
+		var row []string
+
+		for y := 0; y < displaySize*2+1; y++ {
+			row = append(row, ".")
+		}
+
+		grid = append(grid, row)
+	}
+
+	return grid
+}
+
+func main() {
+	// lines := getLines("rockSample.txt")
+	displaySize := 7   // how far left/right from centre
+
+	grid := createEmptyGrid(displaySize)
+
+	for _, row := range grid {
+		for _, object := range row {
+			fmt.Print(object)
+		}
+		fmt.Println()
 	}
 }
