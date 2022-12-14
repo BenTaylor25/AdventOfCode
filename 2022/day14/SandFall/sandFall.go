@@ -72,7 +72,7 @@ func populateGrid(grid [][]string, lines []string, displaySize int) [][]string {
 			}
 
 		}
-		fmt.Println()
+		// fmt.Println()
 	}
 
 	return grid
@@ -97,8 +97,8 @@ func isAbyssSand(grid [][]string, sandCol int) bool {
 }
 
 func main() {
-	lines := getLines("rockSample.txt")
-	displaySize := 7   // how far left/right from centre
+	lines := getLines("rockActual.txt")
+	displaySize := 600   // how far left/right from centre
 	leftX := 500 - displaySize
 
 	grid := createEmptyGrid(displaySize)
@@ -111,6 +111,11 @@ func main() {
 		sandX := 500
 		sandY := 0
 		for sandActive {
+			// fmt.Println(sandY+1, sandX-leftX)
+			if sandY+1 >= len(grid) {
+				_isAbyssSand = true
+				break
+			}
 			if grid[sandY+1][sandX-leftX] == "." {
 				sandY++
 			} else if grid[sandY+1][sandX-leftX-1] == "." {
@@ -133,13 +138,13 @@ func main() {
 		counter++
 	}
 
-	fmt.Println()
-	for _, row := range grid {
-		for _, object := range row {
-			fmt.Print(object)
-		}
-		fmt.Println()
-	}
+	// fmt.Println()
+	// for _, row := range grid {
+	// 	for _, object := range row {
+	// 		fmt.Print(object)
+	// 	}
+	// 	fmt.Println()
+	// }
 
 	fmt.Println(counter)
 }
