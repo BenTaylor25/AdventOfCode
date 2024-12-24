@@ -15,7 +15,7 @@ def get_reports_from_file(filename):
 
     return reports
 
-def is_report_safe(report, min_delta, max_delta):
+def is_report_safe_default(report, min_delta, max_delta):
     if len(report) < 2:
         # Edge case?
         return True
@@ -40,7 +40,7 @@ def is_report_safe(report, min_delta, max_delta):
     return True
 
 
-def reactor_safety_check(filename, min_delta, max_delta):
+def reactor_safety_check(filename, is_report_safe, min_delta, max_delta):
     reports = get_reports_from_file(filename)
 
     reports_safety_validation = list(map(lambda x : is_report_safe(x, min_delta, max_delta), reports))
@@ -49,4 +49,4 @@ def reactor_safety_check(filename, min_delta, max_delta):
     return number_of_safe_reports
 
 if __name__ == "__main__":
-    print(reactor_safety_check(FILENAME, MIN, MAX))
+    print(reactor_safety_check(FILENAME, is_report_safe_default, MIN, MAX))
