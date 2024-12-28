@@ -1,1 +1,5 @@
 __pycache__/
+
+# I don't want this at the root,
+# but my environment keeps creating it...
+AdventOfCode.sln
