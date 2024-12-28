@@ -79,6 +79,15 @@ def antinode_counter(filename):
     antinode_locations = compute_antinodes(map_, antenna_chars)
     unique_antinode_locations = set(antinode_locations)
 
+    for i in range(len(map_)):
+        for j in range(len(map_[i])):
+            if map_[i][j] == EMPTY_SPACE_CHAR and (i,j) in antinode_locations:
+                print('#', end='')
+            else:
+                print(map_[i][j], end='')
+        print()
+    print()
+
     # print(antinode_locations)
     return len(unique_antinode_locations)
 
