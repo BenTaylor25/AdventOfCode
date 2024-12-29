@@ -69,8 +69,12 @@ def calculate_checksum(disk_compacted):
 def compact_blocks(filename):
     disk_map = get_disk_map_from_file(filename)
     disk_expanded = expand_disk_map(disk_map)
+    print([str(x) for x in disk_expanded])
+    print()
 
     disk_compacted = compact_disk(disk_expanded)
+    print([str(x) for x in disk_compacted])
+    print()
 
     checksum = calculate_checksum(disk_compacted)
     return checksum
