@@ -44,7 +44,7 @@ def highest_joltage(bank, max_enabled_batteries):
         idx, num = idx_of_largest_digit(bank_ints_range)
 
         joltage += str(num)
-        previous_idx = idx
+        previous_idx = previous_idx+1 + idx
     
     return int(joltage)
 
